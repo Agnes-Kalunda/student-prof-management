@@ -1,0 +1,242 @@
+{% load django_bootstrap5 %}
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- <script src="{% static 'js/main.js' %}" defer></script> -->
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    {% if title %}
+    <title>Management Sys-{{ title }}</title>
+    {% else %}
+    <title>Management Sys</title>
+    {% endif %}
+
+    <!--CSS -->
+    {% block styles %}
+    {% bootstrap_css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    {% endblock %}
+
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top" aria-label="Offcanvas navbar large">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{% url 'home' %}" style="font-weight: bold;">MANAGEMENT <span
+                    style="color: #5E5CC0;">SYS</span></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar2"
+                aria-controls="offcanvasNavbar2">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="offcanvas offcanvas-end text-white bg-light" tabindex="-1" id="offcanvasNavbar2"
+                aria-labelledby="offcanvasNavbar2Label">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasNavbar2Label">Offcanvas</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
+                        aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="{% url 'home' %}">HOME</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#about">ABOUT US</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#programs">PROGRAMS</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'register' %}">ADMISSIONS</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'tutor-reg' %}">CAREERS</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid mt-3 pt-3" style="height:700px;">
+        <!--HeroSection-->
+        <div class="container pb-3 whole">
+            <div class="row pt-5 ">
+                <div class="col-4">
+                    <div style="height: 50px;">
+                    </div>
+                    <div style="height: 100px;">
+
+                    </div>
+                    <h1 class="fw-bold heroH">
+                        Get Access to free learning resources!
+                    </h1>
+                    <div style="height: 30px;">
+                    </div>
+                    <h6>
+                        Sign up for free, and reveal the <span style="color: #5E5CC0; font-weight: bold;">MORE</span> in
+                        you!
+                    </h6>
+                    <div style="height: 90px;">
+                    </div>
+                    <a class="button1" href="{% url 'register' %}" >ENROLL NOW</a>
+
+                </div>
+
+                <div class="col-8 hero">
+                
+
+                </div>
+            </div>
+
+        </div>
+        </div>
+
+        <!--ABOUT-->
+        <div class="container  pt-5 mb-5" id="about"  style="padding-top: 17vh!important; height: 500px;">
+            <h1 class="text-center headingS">
+                ABOUT US
+            </h1>
+            <div class="rob mt-3" style="display: flex; justify-content: space-between; flex-wrap: wrap; width: 100%; ">
+                <div class="colz-5 abtText" style="width: 40%;">
+
+                    <p class="text-center abtParagraph">
+                        We conveniently enable students from across the globe
+                        access learning materials from wherever they are.
+                        This in turns connects learners and their tutors from
+                        anywhere across the globe.
+                    </p>
+                        
+                    <p> Create an account with us today and get access
+                        to some of the most sought after learning material
+                        there is .
+                    </p> 
+
+                    
+                </div>
+                <div class="colz-7 aboutImg" style="width: 60%;">
+                    <img src="{% static 'assets/django.png' %}" alt="" width="100%" style="height:50%;">
+                </div>
+            </div>
+        </div>
+
+        <!--PROGRAMS-->
+
+        <div class="container  pt-5" id="programs">
+
+            <h1 class="text-center headingS">OUR PROGRAMS</h1>
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="carousel slide" data-ride="carousel" id="carouselIndicators">
+                         <ol class="carousel-indicators">
+                            <li data-target="#carouselIndicators" data-slide-to="0" class="active"></li>
+                            <li data-target="#carouselIndicators" data-slide-to="1"></li>
+                            <li data-target="#carouselIndicators" data-slide-to="2"></li>
+                            
+                          </ol>
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <div class="row">
+                                    <div class="colz" style="width: 50%; margin:auto;">
+                                        <div class="single-box">
+                                            <div class="img-area"><img src="{% static 'assets/django.png'%}" alt=""></div>
+                                            <div class="img-text">
+                                                <p class="word">
+                                                    <strong>ANGULAR</strong>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                                                      
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                            <div class="row">
+                                    <div class="colz" style="width: 50%; margin:auto;">
+                                        <div class="single-box">
+                                            <div class="img-area"><img src="{% static 'assets/django.png' %}" alt="" height=""></div> 
+                                            <div class="img-text">
+                                                <p class="word">
+                                                    <!-- <strong>PYTHON</strong> -->
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                            
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <div class="row">
+                                    <div class="colz" style="width: 50%; margin:auto;">
+                                        <div class="single-box">
+                                            <div class="img-area"><img src="{% static 'assets/django.png' %}" alt=""></div>
+                                            <div class="img-text ">
+                                                <p class="word">
+                                                    <!-- <strong>REACT</strong> -->
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <a class="carousel-control-prev" href="#carouselIndicators" data-slide="prev">
+                            <i class="fa fa-chevron-left"></i>
+                        </a>
+                        <a class="carousel-control-next" href="#carouselIndicators" data-slide="next">
+                            <i class="fa fa-chevron-right"></i>
+                        </a>
+                    </div>
+                </div>
+            
+        </div>
+        <br>
+        <!-- Footer -->
+        <footer class="text-center text-muted mt-5" >
+           <!-- Copyright -->
+            <div class="text-center p-4" >
+                © 2023 Copyright:
+                <a class="text-reset fw-bold" href="{% url 'home' %}" style="text-decoration: none; color:#5E5CC0">MANAGEMENT SYS </a>
+            </div>
+           
+        </footer>
+        
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+
+
+
+
+
+
+</html>
