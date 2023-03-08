@@ -1,0 +1,147 @@
+{% extends 'base.html' %}
+{% load static%}
+{% block styles %}
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock styles %}
+
+
+{% block content %}
+
+<nav class="sidebar close">
+    <header>
+        <div class="image-text">
+            <div class="text header-text">
+                <span class="name">MANAGEMENT <span style="color: #5E5CC0;">SYS</span> </span><br>
+            </div>
+        </div>
+        
+        <i class="bx bx-chevron-right toggle"></i>
+    </header>
+
+    <div class="menu-bar">
+        <div class="menu">
+            <li class="search-box">
+                <i class='bx bx-search icon'></i>
+                <input type="search" placeholder="Search...">
+            </li>
+            <ul class="menu-links">
+                <li class="nav-link">
+                    <a href="">
+                        <i class='bx bxs-graduation icon' ></i>
+                        <small class="text nav-text" style="font-size: 11px;">Logged in as: <small>{{user.first_name}} {{user.last_name}}</small>
+                    </small>
+                    </a>
+                </li>
+                <li class="nav-link">
+                    <a href="{% url 'students' %}">
+                        <i class='bx bx-home-alt icon' ></i>
+                        <span class="text nav-text">HOME</span>
+                    </a>
+                </li>
+                <li class="nav-link">
+                    <a href="{% url 'programs' %}">
+                        <i class='bx bx-bar-chart-alt-2 icon' ></i>
+                        <span class="text nav-text">PROGRAMS</span>
+                    </a>
+                </li>
+                <li class="nav-link">
+                    <a href="#test">
+                        <i class='bx bx-notepad icon' ></i>
+                        <span class="text nav-text">TESTS</span>
+                    </a>
+                </li>
+                                
+            </ul>
+        </div>
+        <div class="bottom-content">
+            <li class="">
+                <a href="{% url 'logout' %}">
+                    <i class='bx bx-log-out icon' ></i>
+                    <span class="text nav-text">Log Out</span>
+                </a>
+            </li>
+
+            <li class="mode">
+                <div class="moon-sun">
+                    <i class='bx bx-moon icon moon' ></i>
+                    <i class='bx bx-sun icon sun' ></i>
+                </div>
+                <span class="mode-text text">Dark Mode</span>
+
+                <div class="toggle-switch">
+                    <span class="switch"></span>
+                </div>
+            </li>
+        </div>
+    </div>
+</nav>
+<section class="home">
+    <h3 class="text text-center">{{user.first_name}}'s  Dashboard</h3>
+    <div class="intro">
+        <div class="card new" id="test">
+            <h4 class="text-muted" style="color:#5E5CC0 ;">Available tests:</h4>
+            {% if tests %}
+            {% for test in tests %}
+            <div class="card tests">
+                <h4 style="color: #5E5CC0;"><a href="{% url 'testDetail' test.pk %}" style="text-decoration: none; color: #5E5CC0;">{{test.title}}</a></h4>
+                <small>Deadline 22/08/2025</small>
+                <strong><p style="float: right; text-transform: uppercase; color:#5E5CC0;">
+                    <a href="{% url 'testDetail' test.pk %}" style="text-decoration: none; color: #5E5CC0;">
+                        ATTEMPT</a></p></strong>
+            </div>
+            {% endfor %}
+
+            {% else %}
+            <div class="card tests">
+                <h4 style="color: #5E5CC0;"><a style="text-decoration: none; color: #5E5CC0;">
+                    Tests will be posted in a few soon...</a></h4>
+                </div>
+            {% endif %}
+        </div>
+        <!--NEWS-->
+        <div class="what">
+            <h4 class="text-muted" style="color:#5E5CC0 ;">What's new:</h4>
+            {% if news %}
+                {% for pop in pops %}
+                <div class="card headline">
+                    <h4 class="">{{pop.title}}</h4>
+                    <p class="text-muted">{{pop.description}}</p>
+                </div>
+                {% endfor %}
+            {% else %}
+                <div class="card headline">
+                    <h4 class="">Ooops... </h4>
+                    <p class="text-muted">There's no news... Study hard though!</p>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+    <div class="card courses">
+        <h4 class="text-muted" style="color:#5E5CC0 ;">My Courses:</h4>
+        {% if activeCourses %}
+        {% for activeCourse in activeCourses %}
+        <div class="card angular">
+            <h5 class="text-muted">{{activeCourse.category}}</h5>
+            <img src="{{activeCourse.coursePoster.url}}" alt="" style="height:230px">
+            <!-- <p class="pt-5" style="width: 100%; margin:auto;"><progress value="100" max="100" class="ang"></progress></p> -->
+            <p style="width: 80%; margin:auto;" class="text-muted">
+                <a href="{% url 'courseDetail' activeCourse.pk %}"
+                style="text-decoration: none; color: #5E5CC0;">VIEW</a>
+            </p>
+        </div>
+        {% endfor %}
+        {% else %}
+        <div class="card tests">
+            <h4 style="color: #5E5CC0;"><a href="#" style="text-decoration: none; color: #5E5CC0;">You're yet to enroll in any program...</a></h4>
+            </div>
+        {% endif %}
+        
+       
+    </div>
+    
+</section>
+
+
+
+{% endblock %}
