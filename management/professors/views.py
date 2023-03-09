@@ -33,3 +33,22 @@ def loginProfessor(request):
                 messages.error(request,"Invalid username or password")
     return render(request, 'professors/login.html',
     context={'form':AuthenticationForm()})
+
+
+def professor(request):
+
+    publishedCourses = Course.objects.filter(professor = request.user.professor).all()
+    # enroll = StudentProfile.enrolledIn
+    # students = publishedCourses.students.all()
+
+    students = Student.objects.filter(enrolls__id__in = publishedCourses).all()
+    # instance = Student.objects.filter(enrolls__id__in = publishedCourses).values('user')[0]
+    print(students)
+    count = students.count()
+    print(count)
+    return render(request, 'professors/professor.html', {'publishedCourses': publishedCourses, 'students': students, 'count': count})
+
+def publishedTests(request):
+        publishedTests = test.objects.all()
+
+        return render(request, 'professors/postedTest.html', {'publishedTests': publishedTests})
