@@ -43,3 +43,12 @@ class Course(models.Model):
 
     def get_absolute_url(self):
             return reverse('professor')
+
+
+class EnrolledCourse(models.Model):
+    student = models.ForeignKey(Student, on_delete = models.CASCADE, null=True, related_name='enrolledStudent')
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, null=True, related_name='courseEnroll')
+    # enrollDate = models.DateTimeField(null=True)
+
+    def get_absolute_url(self):
+            return reverse('dashboard')
