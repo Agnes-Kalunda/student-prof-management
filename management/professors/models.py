@@ -52,3 +52,14 @@ class EnrolledCourse(models.Model):
 
     def get_absolute_url(self):
             return reverse('dashboard')
+    
+class test(models.Model):
+    course = models.ForeignKey(Course, on_delete = models.CASCADE)
+    title = models.CharField(max_length=100)
+    body = models.TextField()
+
+    def __str__(self):
+        return self.title
+
+    def get_absolute_url(self):
+            return reverse('professor')
