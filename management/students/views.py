@@ -78,7 +78,17 @@ def availablePrograms(request):
 
 
 
-    
+class CourseDetail(LoginRequiredMixin, View):
+    def get(self, request, pk):
+        displayedCourses =get_object_or_404(Course, pk=pk)
+        return render (request, 'professors/course.html', {'displayedCourses':displayedCourses})
+    # return render(request, 'professors/course
+
+
+class TestDetail(LoginRequiredMixin, View):
+    def get(self, request, pk):
+        displayedtest =get_object_or_404(test, pk=pk)
+        return render (request, 'professors/test.html', {'displayedtest':displayedtest})
 
 
 
