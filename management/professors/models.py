@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.urls import reverse
+from PIL import Image
 
 
 # Create your models here.
@@ -43,6 +44,15 @@ class Course(models.Model):
 
     def get_absolute_url(self):
             return reverse('professor')
+    
+class StudentProfile(models.Model):
+    user = models.ForeignKey(Student, on_delete = models.CASCADE)
+    profileImage = models.ImageField(default='default.png',upload_to='profilePics')
+    enrolledIn = models.ForeignKey(Course, on_delete = models.CASCADE,  null=True)
+    
+
+    def __str__(self):
+        return f'{self.user}profile'
 
 
 class EnrolledCourse(models.Model):
