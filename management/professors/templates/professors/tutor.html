@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+{% load static%}
+{% block styles %}
+
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock styles %}
+
+
+{% block content %}
+
+<nav class="sidebar close">
+    <header>
+        <div class="image-text">
+            <div class="text header-text">
+                <span class="name">MANAGEMENT <span style="color: #5E5CC0;">SYSTEM</span> </span><br>
+            </div>
+        </div>
+
+        <i class="bx bx-chevron-right toggle"></i>
+    </header>
+
+    <div class="menu-bar">
+        <div class="menu">
+            <li class="search-box">
+                <i class='bx bx-search icon'></i>
+                <input type="search" placeholder="Search...">
+            </li>
+            <ul class="menu-links">
+                <li class="nav-link">
+                    <a href="{% url 'professor' %}">
+                        <i class='bx bx-home-alt icon'></i>
+                        <span class="text nav-text">HOME</span>
+                    </a>
+                </li>
+                <li class="nav-link">
+                    <a href="{% url 'new-course' %}">
+                        <i class='bx bx-plus-circle icon'></i>
+                        <span class="text nav-text">COURSE</span>
+                    </a>
+                </li>
+                <li class="nav-link">
+                    <a href="{% url 'new-test' %}">
+                        <i class='bx bx-list-plus icon'></i>
+                        <span class="text nav-text">TEST</span>
+                    </a>
+                </li>
+                <li class="nav-link">
+                    <a href="#postedCourses">
+                        <i class='bx bx-book-open icon'></i>
+                        <span class="text nav-text">POSTED COURSES</span>
+                    </a>
+                </li>
+                <li class="nav-link">
+                    <a href="#">
+                        <i class='bx bx-slideshow icon'></i>
+                        <span class="text nav-text">POSTED TESTS</span>
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+        <div class="bottom-content">
+            <li class="">
+                <a href="{% url 'professor-logout' %}">
+                    <i class='bx bx-log-out icon'></i>
+                    <span class="text nav-text">Log Out</span>
+                </a>
+            </li>
+
+            <li class="mode">
+                <div class="moon-sun">
+                    <i class='bx bx-moon icon moon'></i>
+                    <i class='bx bx-sun icon sun'></i>
+                </div>
+                <span class="mode-text text">Dark Mode</span>
+
+                <div class="toggle-switch">
+                    <span class="switch"></span>
+                </div>
+            </li>
+        </div>
+    </div>
+</nav>
+<section class="home bg-light" style="height: 100vh;">
+    <h3 class="text">{{user.first_name}}'s Dashboard</h3>
+    <div class="intro">
+        <div class="card professor">
+            <h4 class="text-muted">Enrollment list:</h4>
+            {% for record in students %}
+            <div class="card tests">
+                <h4 style="color: #5E5CC0;">{{record}} </h4>
+                <small></small> <!--Add programs-->
+                <strong>
+                    <!-- <p style="float: right; text-transform: uppercase; color:#5E5CC0;">View</p> -->
+                </strong>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="card courses" id="postedCourses">
+        <h4 class="text-muted">Published Courses:</h4>
+        {% for publishedCourse in publishedCourses %}
+        <div class="card angular">
+            <h5 class="text-muted">{{publishedCourse.category}}</h5>
+            <img src="{{publishedCourse.coursePoster.url}}" alt="" style="height:230px">
+            <!-- <p class="pt-5" style="width: 100%; margin:auto;"><progress value="100" max="100" class="ang"></progress> -->
+            </p>
+            <p style="width: 80%; margin:auto;" class="text-muted">
+
+                <span>Enrolled students:{{count}}</span>
+            </p>
+        </div>
+        {% endfor %}
+
+
+    </div>
+
+</section>
+
+
+
+{% endblock %}

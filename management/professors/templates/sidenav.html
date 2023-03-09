@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% load static%}
+<nav class="sidebar close">
+    <header>
+        <div class="image-text">
+            <div class="text header-text">
+                <span class="name">MANAGEMENT <span style="color: #5E5CC0;">SYSTEM</span> </span><br>
+            </div>
+        </div>
+
+        <i class="bx bx-chevron-right toggle"></i>
+    </header>
+
+    <div class="menu-bar">
+        <div class="menu">
+            <li class="search-box">
+                <i class='bx bx-search icon'></i>
+                <input type="search" placeholder="Search...">
+            </li>
+            <ul class="menu-links">
+                <li class="nav-link">
+                    <a href="{% url 'home' %}">
+                        <i class='bx bx-home-alt icon'></i>
+                        <span class="text nav-text">HOME</span>
+                    </a>
+                </li>
+                <li class="nav-link">
+                    <a href="{% url 'course' %}">
+                        <i class='bx bx-plus-circle icon'></i>
+                        <span class="text nav-text">COURSE</span>
+                    </a>
+                </li>
+                <li class="nav-link">
+                    <a href="{% url 'test' %}">
+                        <i class='bx bx-list-plus icon'></i>
+                        <span class="text nav-text">TEST</span>
+                    </a>
+                </li>
+                <li class="nav-link">
+                    <a href="{% url 'postedcourses' %}">
+                        <i class='bx bx-book-open icon'></i>
+                        <span class="text nav-text">POSTED COURSES</span>
+                    </a>
+                </li>
+                <li class="nav-link">
+                    <a href="{% url 'postedtest' %}">
+                        <i class='bx bx-slideshow icon'></i>
+                        <span class="text nav-text">POSTED TESTS</span>
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+        <div class="bottom-content">
+            <li class="">
+                <a href="logout">
+                    <i class='bx bx-log-out icon'></i>
+                    <span class="text nav-text">Log Out</span>
+                </a>
+            </li>
+
+            <li class="mode">
+                <div class="moon-sun">
+                    <i class='bx bx-moon icon moon'></i>
+                    <i class='bx bx-sun icon sun'></i>
+                </div>
+                <span class="mode-text text">Dark Mode</span>
+
+                <div class="toggle-switch">
+                    <span class="switch"></span>
+                </div>
+            </li>
+        </div>
+    </div>
+</nav>
+<section class="home">
+    <div class="text">Dashboard</div>
+</section>
+<script src="{% static 'js/script.js' %}"></script>

@@ -1,0 +1,67 @@
+{% load widget_tweaks %}
+{% load static%}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
+    crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <title>Management Sys | professor</title>
+</head>
+<body style="background-color: #F0EDED;">
+  <a class="navbar-brand fixed-top" href="{% url 'home' %}" style="font-weight: bold; color: black;">MANAGEMENT  <span
+    style="color: #5E5CC0;">SYSTEM</span></a>
+    
+    
+    <section>
+        <div class="container">
+          <div class="row">
+            <div class="col-md-5" style="margin-top: 15%;">
+
+              <div class="text">
+                <h2><strong>Join the best professor team <br>in the world today</strong></h2>
+              </div>
+
+              <div class="img">
+                {% load static %} <img src="{% static 'assets/profe.png' %}" alt="students" style= "width: 80%"; height=50%";/>
+              </div>
+              
+            </div>
+            <div class="col-md-6 mb-2 mx-auto card new" style="margin-top: 5%;">
+                  <h2 class="text-center pt-4" style="color: #5E5CC0;"><strong>Join The Team!</strong></h2>
+                <div class="txt" style="text-align: center; opacity: 0.5; margin-top: 1%;">
+                  <p><small>Sign up to get started...</small></p>
+                </div>
+                    <form action="{% url 'professor-reg' %}" method="POST" novalidate>
+                      {% csrf_token %}
+                         {% for field in form.visible_fields %}
+                           <div class="form-group">
+                               {{ field.label_tag }}
+                                  {% render_field field class="form-control" %}
+                                    {% for error in field.errors %}
+                                      <span style="color:red">{{ error }}</span>
+                                    {% endfor %}
+                         {% endfor %}
+                             <input type="submit" value="Register" class="btn btn-block btn-primary mt-5" style="background-color: #5E5CC0;">
+                           </div>
+                           <p class="text-center"><small class="text-muted text center">ALREADY HAVE AN ACCOUNT?</small></p>
+                           <a type="submit" href="{% url 'professor-login' %}" value="LOGIN" class="btn btn-block btn-primary" style="background-color: #5E5CC0;">LOGIN</a>
+
+                    </form>
+                    
+                </div>
+ 
+            </div>
+         
+              </div>
+          
+    
+      </section>
+
+</body>
+</html>
