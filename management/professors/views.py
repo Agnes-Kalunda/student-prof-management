@@ -5,6 +5,7 @@ from .models import *
 from .forms import *
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import messages
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Create your views here.
 class ProfessorReg(CreateView):
@@ -52,3 +53,20 @@ def publishedTests(request):
         publishedTests = test.objects.all()
 
         return render(request, 'professors/postedTest.html', {'publishedTests': publishedTests})
+
+
+class addCourse(LoginRequiredMixin, CreateView):
+    model = Course
+    fields = ['title','category','coursePoster', 'descriptions', 'body']
+    template_name = 'professors/newCourse.html'
+    def form_valid(self, form):
+        form.instance.tutor=self.request.user.professor
+        return super().form_valid(form)
+
+class addTest(LoginRequiredMixin, CreateView):
+    model = test
+    fields = ['title','course', 'body']
+    template_name = 'professors/newTest.html'
+    def form_valid(self, form):
+        # form.instance.professor=self.request.user
+        return super().form_valid(form)
