@@ -60,7 +60,7 @@ class addCourse(LoginRequiredMixin, CreateView):
     fields = ['title','category','coursePoster', 'descriptions', 'body']
     template_name = 'professors/newCourse.html'
     def form_valid(self, form):
-        form.instance.tutor=self.request.user.professor
+        form.instance.professor=self.request.user.professor
         return super().form_valid(form)
 
 class addTest(LoginRequiredMixin, CreateView):
