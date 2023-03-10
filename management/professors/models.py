@@ -15,7 +15,7 @@ class User(AbstractUser):
 
 #studentModel
 class Student(models.Model):
-    user = models.OneToOneField(User, on_delete = models.CASCADE, related_name='student',primary_key = True) 
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='student',primary_key = True) 
     # courseInterest = models.TextField()
 
     def __str__(self):
@@ -23,7 +23,7 @@ class Student(models.Model):
 
 #professorModel 
 class Professor(models.Model):
-    user = models.OneToOneField(User, related_name='professor', on_delete = models.CASCADE, primary_key = True)
+    user = models.OneToOneField(User, on_delete = models.CASCADE, related_name='professor', primary_key = True)
     def __str__(self):
             return self.user.first_name
     
