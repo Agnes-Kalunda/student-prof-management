@@ -83,6 +83,26 @@
 </nav>
 <section class="home bg-light" style="height: 100vh;">
     <h3 class="text">{{user.first_name}}'s Dashboard</h3>
+
+
+    <div class="card courses" id="postedCourses">
+        <h4 class="text-muted">Published Courses:</h4>
+        {% for publishedCourse in publishedCourses %}
+        <div class="card angular">
+            <h5 class="text-muted">{{publishedCourse.category}}</h5>
+            <img src="{{publishedCourse.coursePoster.url}}" alt="" style="height:170px">
+            <!-- <p class="pt-5" style="width: 100%; margin:auto;"><progress value="100" max="100" class="ang"></progress> -->
+            </p>
+            <p style="width: 80%; margin:auto;" class="text-muted">
+
+                <span>Enrolled students:  {{count}}</span>
+            </p>
+        </div>
+        {% endfor %}
+
+
+    </div>
+
     <div class="intro">
         <div class="card professor">
             <h4 class="text-muted">Enrollment list:</h4>
@@ -97,23 +117,7 @@
             {% endfor %}
         </div>
     </div>
-    <div class="card courses" id="postedCourses">
-        <h4 class="text-muted">Published Courses:</h4>
-        {% for publishedCourse in publishedCourses %}
-        <div class="card angular">
-            <h5 class="text-muted">{{publishedCourse.category}}</h5>
-            <img src="{{publishedCourse.coursePoster.url}}" alt="" style="height:230px">
-            <!-- <p class="pt-5" style="width: 100%; margin:auto;"><progress value="100" max="100" class="ang"></progress> -->
-            </p>
-            <p style="width: 80%; margin:auto;" class="text-muted">
-
-                <span>Enrolled students:{{count}}</span>
-            </p>
-        </div>
-        {% endfor %}
-
-
-    </div>
+ 
 
 </section>
 

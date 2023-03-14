@@ -367,10 +367,12 @@ section.home {
     backdrop-filter: blur(5px);
 }
 
+
+
 .courses {
-    /* display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between; */
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
     background-color: rgba(255, 255, 255, 0.2);
     border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: 16px;
@@ -379,6 +381,8 @@ section.home {
     padding: 20px 25px;
     box-shadow: 0 4px 30px rgba(0,0,0,0.1);
     backdrop-filter: blur(5px); 
+    margin-right: 3%;
+    margin-left: 3%;
 }
 
 .tests, .headline{
@@ -406,15 +410,39 @@ p progress[value].ang {
 }
 .angular,.react,.python {
     color: #5E5CC0;
+
     width: 25%;
     background-color: rgba(255, 255, 255, 0.2);
     border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: 16px;
     border-top: 0;
     margin-top: 2.5%;
+    margin-left: 1%;
+    margin-right: 4%;
     padding: 20px 15px;
     box-shadow: 0 4px 30px rgba(0,0,0,0.1);
     backdrop-filter: blur(5px);
+ 
+
+    
+}
+
+.angular2 {
+    color: #5E5CC0;
+
+    width: 25%;
+    background-color: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 16px;
+    border-top: 0;
+    margin-top: 2.5%;
+    margin-left: 1%;
+    margin-right: 4%;
+    padding: 20px 15px;
+    box-shadow: 0 4px 30px rgba(0,0,0,0.1);
+    backdrop-filter: blur(5px);
+ 
+
 }
 /* .angulary {
     color: #5E5CC0;
@@ -522,9 +550,9 @@ p progress[value].ang {
     .angular{
         width: 50%;
     }
-    .coz{
+    /* .coz{
         height: 50vh;
-    }
+    } */
     .courses{
         width: 90%;
         margin: auto;
