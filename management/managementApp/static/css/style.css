@@ -373,7 +373,9 @@ section.home {
     display: flex;
     justify-content: space-between;
     flex-direction: row;
- flex-wrap: wrap;
+    flex-wrap: wrap;
+    gap: 5;
+
     background-color: rgba(255, 255, 255, 0.2);
     border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: 16px;
@@ -384,6 +386,8 @@ section.home {
     backdrop-filter: blur(5px); 
     margin-right: 3%;
     margin-left: 3%;
+    
+   
 }
 
 .tests, .headline{
@@ -401,6 +405,7 @@ section.home {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
+    padding-top: 5%;
 }
 p progress[value].ang {
     color: #5E5CC0;
@@ -411,18 +416,19 @@ p progress[value].ang {
 }
 .angular,.react,.python {
     color: #5E5CC0;
-
+    align-items: center;
     width: 25%;
     background-color: rgba(255, 255, 255, 0.2);
     border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: 16px;
     border-top: 0;
-    margin-top: 2.5%;
+    margin-top: 5%;
     margin-left: 1%;
     margin-right: 4%;
     padding: 20px 15px;
     box-shadow: 0 4px 30px rgba(0,0,0,0.1);
     backdrop-filter: blur(5px);
+ 
  
 
     
@@ -430,7 +436,7 @@ p progress[value].ang {
 
 .angular2 {
     color: #5E5CC0;
-
+    align-items: center;
     width: 25%;
     background-color: rgba(255, 255, 255, 0.2);
     border: 1px solid rgba(255, 255, 255, 0.3);

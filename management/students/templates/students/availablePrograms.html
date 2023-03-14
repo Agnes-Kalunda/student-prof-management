@@ -79,13 +79,16 @@
 <section class="home">
     <h3 class="text text-center">{{user.first_name}}'s  Dashboard</h3>
     
+
+
+    <h2 class="text-muted" style="color:#5E5CC0 ; padding-top: 4%; padding-left: 4%;">Available Courses:</h2>
     <div class="card courses">
-        <h4 class="text-muted" style="color:#5E5CC0 ;">Available Courses:</h4>
+        
     
         {% for course in courses %}
       
             <div class=" angular2 ">
-                <h3 class="text-muted" style="margin-top: 1%; margin-bottom: 1%;">{{course.category}}</h3>
+                <h3 class="text-muted" style="margin-top: 1%; margin-bottom: 1%;">{{course.category}} <p> By : {{course.professor}}</p></h3>
                 <img src="{{course.coursePoster.url}}" alt="" style="height:170px ; width: 100%;">
                 <p style="width: 80%; margin:auto;" class="text-muted">
                     <!-- <span>5/5 lessons</span> -->
