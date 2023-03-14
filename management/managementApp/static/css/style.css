@@ -373,6 +373,7 @@ section.home {
     display: flex;
     justify-content: space-between;
     flex-direction: row;
+ flex-wrap: wrap;
     background-color: rgba(255, 255, 255, 0.2);
     border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: 16px;
@@ -435,7 +436,7 @@ p progress[value].ang {
     border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: 16px;
     border-top: 0;
-    margin-top: 2.5%;
+    margin-top: 5%;
     margin-left: 1%;
     margin-right: 4%;
     padding: 20px 15px;

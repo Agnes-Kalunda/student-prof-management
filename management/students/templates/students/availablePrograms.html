@@ -86,7 +86,7 @@
       
             <div class=" angular2 ">
                 <h3 class="text-muted" style="margin-top: 1%; margin-bottom: 1%;">{{course.category}}</h3>
-                <img src="{{course.coursePoster.url}}" alt="" style="height:170px">
+                <img src="{{course.coursePoster.url}}" alt="" style="height:170px ; width: 100%;">
                 <p style="width: 80%; margin:auto;" class="text-muted">
                     <!-- <span>5/5 lessons</span> -->
                     <form method="POST" action="{% url 'enroll' course.pk %}">
