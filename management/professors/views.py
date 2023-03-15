@@ -44,10 +44,24 @@ def professor(request):
 
     students = Student.objects.filter(enrolls__id__in = publishedCourses).all()
     # instance = Student.objects.filter(enrolls__id__in = publishedCourses).values('user')[0]
-    print(students)
+    # print(students)
     count = students.count()
     print(count)
     return render(request, 'professors/professor.html', {'publishedCourses': publishedCourses, 'students': students, 'count': count})
+
+
+def studentsEnrolled(request):
+    publishedCourses = Course.objects.filter(professor = request.user.professor).all()
+    # enroll = StudentProfile.enrolledIn
+    # students = publishedCourses.students.all()
+
+    students = Student.objects.filter(enrolls__id__in = publishedCourses).all()
+    # instance = Student.objects.filter(enrolls__id__in = publishedCourses).values('user')[0]
+    # print(students)
+    count = students.count()
+    print(count)
+    
+    return render(request, 'professors/studentsEnrolled.html',  {'publishedCourses': publishedCourses, 'students': students, 'count': count})
 
 def publishedTests(request):
         publishedTests = test.objects.all()

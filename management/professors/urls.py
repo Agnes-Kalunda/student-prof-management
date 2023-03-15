@@ -1,7 +1,7 @@
 from django.urls import path
 from django.contrib.auth import views as auth_views
 from . import views
-from professors.views import ProfessorReg, addCourse, addTest
+from professors.views import ProfessorReg, addCourse, addTest, studentsEnrolled
 
 urlpatterns = [
     
@@ -12,4 +12,5 @@ urlpatterns = [
     path('new-course/', addCourse.as_view(), name='new-course'),
     path('new-test/', addTest.as_view(), name='new-test'),
     path('posted-tests/', views.publishedTests, name = 'postedTest'), #postedTests
+    path('studentsEnrolled/', views.studentsEnrolled, name='studentsEnrolled'),
 ]

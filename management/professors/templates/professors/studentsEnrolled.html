@@ -91,26 +91,29 @@
 <section class="home bg-light" style="height: 100vh;">
     <h3 class="text" style="text-align: center;">{{user.first_name}}'s Dashboard</h3>
 
-    <h2 class="text-muted" style="padding-top: 4%; padding-left: 4%; padding-bottom: 0%;">Published Courses:</h2>
-    <div class="card courses" id="postedCourses">
-       
-        {% for publishedCourse in publishedCourses %}
-        <div class="card angular" style="margin: 2%;">
-            <h3 class="text-muted" style="padding-bottom: 2%;">{{publishedCourse.category}}</h3>
-            <img src="{{publishedCourse.coursePoster.url}}" alt="" style="height:170px; width: 90%;">
-            <!-- <p class="pt-5" style="width: 100%; margin:auto;"><progress value="100" max="100" class="ang"></progress> -->
-            </p>
-            <p style="width: 80%; margin:auto; padding-top: 2%;" class="text-muted">
+   
+    <h2 class="text-muted" style="padding-top: 4%; padding-left: 4%;">Enrollment list:</h2>
+    <div class="intro">
+        <div class="card professor">
 
-                <span>Enrolled students:  {{count}}</span>
-            </p>
+           <div style="display: flex;  justify-content: space-around;">
+            <h3>Name</h3>
+            <h3>Program</h3>
+            <h4> Grade</h4>
+
+           </div>
+            
+            {% for record in students %}
+            <div class="card tests">
+                <h4 style="color: #5E5CC0; display: flex; justify-content: space-around;">{{record}}    <p>Program : {{publishedCourse.title}}</p>   <p>Grade : </p></h4>
+                <small></small> <!--Add programs-->
+                <strong>
+                    <!-- <p style="float: right; text-transform: uppercase; color:#5E5CC0;">View</p> -->
+                </strong>
+            </div>
+            {% endfor %}
         </div>
-        {% endfor %}
-
-
     </div>
-
-    
  
 
 </section>
