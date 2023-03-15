@@ -6,6 +6,8 @@ from .forms import *
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import HttpResponseNotFound
+from django.db.models import Prefetch  
 
 # Create your views here.
 class ProfessorReg(CreateView):
@@ -36,18 +38,66 @@ def loginProfessor(request):
     context={'form':AuthenticationForm()})
 
 
+# def professor(request):
+
+#     publishedCourses = Course.objects.filter(professor = request.user.professor).first()
+#     # enroll = StudentProfile.enrolledIn
+#     # students = publishedCourses.students.all()
+
+#     if not publishedCourses:
+#          return HttpResponseNotFound()
+    
+#     enrolled_students= publishedCourses.students.all()
+
+#     count = enrolled_students.count()
+         
+    # students = Student.objects.filter(enrolls__id__in = publishedCourses).all()
+    # count = students.count()
+
+
+
+
+
+    # course_counts = {}
+    # for course in publishedCourses:
+    #     enrolled_students = course.students.all()
+    #     course_counts[course.title] = enrolled_students.count()
+
+    # count = students.count()
+    # print(course_counts)
+    # return render(request, 'professors/professor.html', {'publishedCourses': publishedCourses,  'count': count})
+
 def professor(request):
 
-    publishedCourses = Course.objects.filter(professor = request.user.professor).all()
-    # enroll = StudentProfile.enrolledIn
-    # students = publishedCourses.students.all()
+    publishedCourses = Course.objects.filter(professor=request.user.professor).all()
+   
 
-    students = Student.objects.filter(enrolls__id__in = publishedCourses).all()
+    students = Student.objects.filter(
+        enrolls__in=publishedCourses
+    ).prefetch_related(
+        Prefetch('enrolls', queryset=publishedCourses)
+
+    )
+
+    course_student_map = {}
+    for student in students:
+        for course in student.enrolls.all():
+            course_student_map.setdefault(course, []).append(student)
+
+    course_data = []
+    for course in publishedCourses:
+        course_data.append({
+            'course': course,
+            'students': course_student_map.get(course, []),
+            'student_count': len(course_student_map.get(course, [])),
+        })
+
+    return render(request, 'professors/professor.html', {'course_data': course_data})
     # instance = Student.objects.filter(enrolls__id__in = publishedCourses).values('user')[0]
     # print(students)
-    count = students.count()
-    print(count)
-    return render(request, 'professors/professor.html', {'publishedCourses': publishedCourses, 'students': students, 'count': count})
+    # count = students.count()
+    # print(count)
+    # return render(request, 'professors/professor.html', {'publishedCourses': publishedCourses, 'students': students, 'count': count})
 
 
 def studentsEnrolled(request):
@@ -84,3 +134,6 @@ class addTest(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         # form.instance.professor=self.request.user
         return super().form_valid(form)
+    
+# def grades(request):
+     

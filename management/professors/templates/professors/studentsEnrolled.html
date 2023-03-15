@@ -91,7 +91,7 @@
 <section class="home bg-light" style="height: 100vh;">
     <h3 class="text" style="text-align: center;">{{user.first_name}}'s Dashboard</h3>
 
-   
+    
     <h2 class="text-muted" style="padding-top: 4%; padding-left: 4%;">Enrollment list:</h2>
     <div class="intro">
         <div class="card professor">
@@ -102,15 +102,17 @@
             <h4> Grade</h4>
 
            </div>
-            
-            {% for record in students %}
+          
+            {% for student in students %}
+             {% for publishedCourse in publishedCourses %}
             <div class="card tests">
-                <h4 style="color: #5E5CC0; display: flex; justify-content: space-around;">{{record}}    <p>Program : {{publishedCourse.title}}</p>   <p>Grade : </p></h4>
+                <h4 style="color: #5E5CC0; display: flex; justify-content: space-around;">{{student}}    <p> {{publishedCourse.title}}</p>   <p> </p></h4>
                 <small></small> <!--Add programs-->
                 <strong>
                     <!-- <p style="float: right; text-transform: uppercase; color:#5E5CC0;">View</p> -->
                 </strong>
             </div>
+            {% endfor %}
             {% endfor %}
         </div>
     </div>

@@ -1,8 +1,8 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.db import transaction
-from . models import User, Professor
-
+from . models import User, Professor, Grade
+from django.forms import ModelForm
 
 
 class ProfessorRegisterForm(UserCreationForm):
@@ -28,4 +28,7 @@ class ProfessorRegisterForm(UserCreationForm):
         return user
 
 
-  
+# class gradesForm(ModelForm):
+#     class Meta:
+#         model = Grade 
+#         fields = '__all__'

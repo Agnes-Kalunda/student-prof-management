@@ -73,3 +73,12 @@ class test(models.Model):
 
     def get_absolute_url(self):
             return reverse('professor')
+    
+
+class Grade(models.Model):
+    student = models.ForeignKey(Student, on_delete =models.CASCADE)
+    course = models.ForeignKey(Course, on_delete =models.CASCADE)
+    score = models.FloatField()
+
+    def __str__(self):
+         return self.student.user.username + '-' + self.course.title
