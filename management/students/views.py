@@ -92,4 +92,10 @@ class TestDetail(LoginRequiredMixin, View):
 
 
 
-    
+# def student_view_result(request):
+#     student = Student.objects.get(admin=request.user.id)
+#     student_result = StudentResult.objects.filter(student_id=student.id)
+#     context = {
+#         "student_result": student_result,
+#     }
+#     return render(request, "student_template/student_view_result.html", context)

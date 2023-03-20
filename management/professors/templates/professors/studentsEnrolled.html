@@ -64,6 +64,13 @@
                     </a>
                 </li>
 
+                <li class="nav-link">
+                    <a href="{% url 'create_grade' %}">
+                        <i class='bx bx-book-open icon'></i>
+                        <span class="text nav-text">GRADES</span>
+                    </a>
+                </li>
+
             </ul>
         </div>
         <div class="bottom-content">
@@ -93,29 +100,26 @@
 
     
     <h2 class="text-muted" style="padding-top: 4%; padding-left: 4%;">Enrollment list:</h2>
-    <div class="intro">
-        <div class="card professor">
-
-           <div style="display: flex;  justify-content: space-around;">
-            <h3>Name</h3>
-            <h3>Program</h3>
-            <h4> Grade</h4>
-
-           </div>
-          
-            {% for student in students %}
-             {% for publishedCourse in publishedCourses %}
-            <div class="card tests">
-                <h4 style="color: #5E5CC0; display: flex; justify-content: space-around;">{{student}}    <p> {{publishedCourse.title}}</p>   <p> </p></h4>
-                <small></small> <!--Add programs-->
-                <strong>
-                    <!-- <p style="float: right; text-transform: uppercase; color:#5E5CC0;">View</p> -->
-                </strong>
-            </div>
-            {% endfor %}
-            {% endfor %}
-        </div>
-    </div>
+    <table class="card tests" style="display: flex; justify-content: space-evenly;">
+        <thead>
+          <tr >
+            <th >Student Name</th>
+            <th >Course Title</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% if students_and_courses %}
+          {% for student_and_course in students_and_courses %}
+            <tr>
+              <td>{{ student_and_course.student_name }}</td>
+              <td>{{ student_and_course.course_title }}</td>
+            </tr>
+          {% endfor %}
+          {% else %}
+          <h4> You don't have any Students enrolled yet..</h4>
+          {% endif %}
+        </tbody>
+      </table>
  
 
 </section>

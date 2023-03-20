@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect 
 from django.contrib.auth import login, logout, authenticate
 from django.views.generic import CreateView
+from django.urls import reverse_lazy
 from .models import *
 from .forms import *
 from django.contrib.auth.forms import AuthenticationForm
@@ -68,15 +69,12 @@ def loginProfessor(request):
     # return render(request, 'professors/professor.html', {'publishedCourses': publishedCourses,  'count': count})
 
 def professor(request):
-
     publishedCourses = Course.objects.filter(professor=request.user.professor).all()
    
-
     students = Student.objects.filter(
         enrolls__in=publishedCourses
     ).prefetch_related(
         Prefetch('enrolls', queryset=publishedCourses)
-
     )
 
     course_student_map = {}
@@ -88,11 +86,11 @@ def professor(request):
     for course in publishedCourses:
         course_data.append({
             'course': course,
-            'students': course_student_map.get(course, []),
             'student_count': len(course_student_map.get(course, [])),
         })
 
     return render(request, 'professors/professor.html', {'course_data': course_data})
+
     # instance = Student.objects.filter(enrolls__id__in = publishedCourses).values('user')[0]
     # print(students)
     # count = students.count()
@@ -101,17 +99,30 @@ def professor(request):
 
 
 def studentsEnrolled(request):
-    publishedCourses = Course.objects.filter(professor = request.user.professor).all()
-    # enroll = StudentProfile.enrolledIn
-    # students = publishedCourses.students.all()
+    published_courses = Course.objects.filter(professor=request.user.professor)
+    student_enrollments = Student.objects.filter(enrolls__in=published_courses).order_by('user__last_name')
 
-    students = Student.objects.filter(enrolls__id__in = publishedCourses).all()
+    students_and_courses = []
+    for enrollment in student_enrollments:
+        courses = enrollment.enrolls.filter(id__in=published_courses.values_list('id', flat=True))
+        for course in courses:
+            students_and_courses.append({
+                'student_name': enrollment.user.get_full_name(),
+                'course_title': course.title
+            })
+
+    return render(request, 'professors/studentsEnrolled.html', {
+        'students_and_courses': students_and_courses
+    })
+
+    
+    # students = Student.objects.filter(enrolls__id__in = publishedCourses).all()
     # instance = Student.objects.filter(enrolls__id__in = publishedCourses).values('user')[0]
     # print(students)
-    count = students.count()
-    print(count)
+    # count = students.count()
+    # print(count)
     
-    return render(request, 'professors/studentsEnrolled.html',  {'publishedCourses': publishedCourses, 'students': students, 'count': count})
+    # return render(request, 'professors/studentsEnrolled.html',  {'publishedCourses': publishedCourses, 'students': students, 'count': count})
 
 def publishedTests(request):
         publishedTests = test.objects.all()
@@ -135,5 +146,25 @@ class addTest(LoginRequiredMixin, CreateView):
         # form.instance.professor=self.request.user
         return super().form_valid(form)
     
-# def grades(request):
-     
+# View to display a list of all grades for a specific student
+class GradeCreateView(LoginRequiredMixin, CreateView):
+    model = Grade
+    fields = ['student', 'course', 'grade']
+    template_name = 'createGrade.html'
+    def form_valid(self, form):
+        # form.instance.professor=self.request.user
+        return super().form_valid(form)
+
+
+# class GradeUpdateView(LoginRequiredMixin, UpdateView):
+#     model = Grade
+#     fields = ['student', 'course', 'grade']
+#     template_name = 'updateGrade.html'
+#     def form_valid(self, form):
+#         # form.instance.professor=self.request.user
+#         return super().form_valid(form)
+
+# class GradeDeleteView(LoginRequiredMixin, DeleteView):
+#     model = Grade
+#     success_url = reverse_lazy('grades_list')
+#     template_name = 'grades/delete.html'

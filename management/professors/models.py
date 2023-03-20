@@ -11,11 +11,13 @@ class User(AbstractUser):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     email=models.EmailField()
+    
 
 
 #studentModel
 class Student(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='student',primary_key = True) 
+    
     # courseInterest = models.TextField()
 
     def __str__(self):
@@ -75,10 +77,12 @@ class test(models.Model):
             return reverse('professor')
     
 
-class Grade(models.Model):
-    student = models.ForeignKey(Student, on_delete =models.CASCADE)
-    course = models.ForeignKey(Course, on_delete =models.CASCADE)
-    score = models.FloatField()
-
+class Grade (models.Model):
+    student = models.ForeignKey(Student, on_delete=models.CASCADE)
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
+    grade = models.DecimalField(max_digits=5, decimal_places=2)
     def __str__(self):
-         return self.student.user.username + '-' + self.course.title
+        return self.title
+
+    def get_absolute_url(self):
+            return reverse('professor')
