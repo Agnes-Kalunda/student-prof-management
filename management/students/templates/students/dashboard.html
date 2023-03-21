@@ -80,12 +80,12 @@
     <h3 class="text text-center " style="font-weight: bolder; text-align: center;">{{user.first_name}}'s  Dashboard</h3>
     <div class="intro">
         <div class="card new" id="test">
-            <h4 class="text-muted" style="color:#5E5CC0 ;">Available tests:</h4>
+            <h4 class="text-muted" style="color:#5E5CC0 ;">Practice tests available :</h4>
             {% if tests %}
             {% for test in tests %}
             <div class="card tests">
                 <h4 style="color: #5E5CC0;"><a href="{% url 'testDetail' test.pk %}" style="text-decoration: none; color: #5E5CC0;">{{test.title}}</a> </h4>
-                <small>Deadline 22/08/2030</small>
+                <!-- <small>Deadline 22/08/2030</small> -->
                 <strong><p style="float: right; text-transform: uppercase; color:#5E5CC0;">
                     <a href="{% url 'testDetail' test.pk %}" style="text-decoration: none; color: #5E5CC0;">
                         ATTEMPT</a></p></strong>
@@ -124,12 +124,12 @@
         {% if activeCourses %}
         {% for activeCourse in activeCourses %}
         <div class="card angular" style="margin-left: auto; margin-bottom: 2%; ">
-            <h3 class="text-muted" style="margin-top: 1%; margin-bottom: 1%;">{{activeCourse.category}}</h3> By : {{activeCourse.professor}}
+            <h3 class="text-muted" style="margin-top: 1%; padding-bottom: 2%; margin-bottom: 1%;">{{activeCourse.category}}</h3> <h4 style="padding-bottom: 3%;">By : {{activeCourse.professor}}</h4>
             <img src="{{activeCourse.coursePoster.url}}" alt="" style=" height:170px; width: 90%;">
             <!-- <p class="pt-5" style="width: 100%; margin:auto;"><progress value="100" max="100" class="ang"></progress></p> -->
-            <p style="width: 80%; margin:auto;" class="text-muted">
+            <p style="width: 80%; text-align: center; padding-top: 2%;" class="text-muted">
                 <a href="{% url 'courseDetail' activeCourse.pk %}"
-                style="text-decoration: none; color: #5E5CC0;">VIEW</a>
+                style="text-decoration: none; text-align: center; color: #5E5CC0;">VIEW</a>
             </p>
         </div>
         {% endfor %}

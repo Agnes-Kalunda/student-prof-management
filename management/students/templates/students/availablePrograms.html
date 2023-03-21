@@ -88,7 +88,8 @@
         {% for course in courses %}
       
             <div class=" angular2 ">
-                <h3 class="text-muted" style="margin-top: 1%; margin-bottom: 1%;">{{course.category}} <p> By : {{professor}}</p></h3>
+                <h3 class="text-muted" style="margin-top: 1%; margin-bottom: 1%;">{{course.category}} </h3>
+                <h3 style="padding-bottom: 3%; padding-top: 3%;"> By : {{course.professor}}</h3>
                 <img src="{{course.coursePoster.url}}" alt="" style="height:170px ; width: 100%;">
                 <p style="width: 80%; margin:auto;" class="text-muted">
                     <!-- <span>5/5 lessons</span> -->
