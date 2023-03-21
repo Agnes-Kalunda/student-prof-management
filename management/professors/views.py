@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect 
+from django.shortcuts import render, redirect , get_object_or_404
 from django.contrib.auth import login, logout, authenticate
 from django.views.generic import CreateView
 from django.urls import reverse_lazy
@@ -9,6 +9,7 @@ from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseNotFound
 from django.db.models import Prefetch  
+from django.views.generic import View
 
 # Create your views here.
 class ProfessorReg(CreateView):
@@ -80,8 +81,8 @@ def professor(request):
             'course': course,
             'student_count': student_count,
         })
-
     return render(request, 'professors/professor.html', {'course_data': course_data, 'publishedCourses': publishedCourses})
+    # return render(request, 'professors/professor.html', {'course_data': course_data, 'publishedCourses': publishedCourses})
 
     # instance = Student.objects.filter(enrolls__id__in = publishedCourses).values('user')[0]
     # print(students)
@@ -142,7 +143,13 @@ class GradeCreateView(LoginRequiredMixin, CreateView):
         # form.instance.professor=self.request.user
         return super().form_valid(form)
 
+# class CourseDetail(LoginRequiredMixin, View):
+#     def get(self, request, pk):
+#         displayedCourses =get_object_or_404(Course, pk=pk)
+#         return render (request, 'professors/course.html', {'displayedCourses':displayedCourses})
+    
 
+    # return render(request, 'professors/course
 # class GradeUpdateView(LoginRequiredMixin, UpdateView):
 #     model = Grade
 #     fields = ['student', 'course', 'grade']

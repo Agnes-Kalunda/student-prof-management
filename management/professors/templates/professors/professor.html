@@ -106,16 +106,22 @@
             <div class="card angular" style="margin: 2%;">
                 <h3 class="text-muted" style="padding-bottom: 2%;">{{publishedCourse.category}}</h3>
                 <img src="{{publishedCourse.coursePoster.url}}" alt="" style="height:170px; width: 90%;">
-                <p style="width: 80%; margin:auto; padding-top: 2%;" class="text-muted">
-                    Enrolled students:  {{ course_info.student_count }}
-                    {% if course_info.student_count > 0 %}
-                        <ul>
-                        {% for student in course_info.enrolled_students %}
-                            <li>{{ student.first_name }} {{ student.last_name }}</li>
-                        {% endfor %}
-                        </ul>
-                    {% endif %}
-                </p>
+                <div style="display: flex; justify-content: space-evenly;">
+                    <p style="width: 80%; margin:auto; padding-top: 2%;" class="text-muted">
+                        Students:  {{ course_info.student_count }}
+                        {% if course_info.student_count > 0 %}
+                            <ul>
+                            {% for student in course_info.enrolled_students %}
+                                <li>{{ student.first_name }} {{ student.last_name }}</li>
+                            {% endfor %}
+                            </ul>
+                        {% endif %}
+                    </p> <p style="width: 80%; margin:auto;" class="text-muted">
+                       
+                    </p>
+                    <a style="text-decoration: none; color: #5E5CC0; padding-bottom: 2%; padding-top: 5%; padding-right: 11%; ">VIEW</a>
+                </div>
+                
             </div>
             {% endif %}
         {% endfor %}

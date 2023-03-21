@@ -14,6 +14,7 @@ urlpatterns = [
     path('posted-tests/', views.publishedTests, name = 'postedTest'), #postedTests
     path('studentsEnrolled/', views.enrolled_students, name='studentsEnrolled'),
     path('create_grade/', GradeCreateView.as_view(), name='create_grade'),
+   
     # path('update_grade/<int:pk>/', GradeUpdateView.as_view(), name='update_grade'),
     # path('delete_grade/<int:pk>/', GradeDeleteView.as_view(), name='delete_grade'),
 
