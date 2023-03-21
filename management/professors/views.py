@@ -143,11 +143,15 @@ class GradeCreateView(LoginRequiredMixin, CreateView):
         # form.instance.professor=self.request.user
         return super().form_valid(form)
 
-# class CourseDetail(LoginRequiredMixin, View):
-#     def get(self, request, pk):
-#         displayedCourses =get_object_or_404(Course, pk=pk)
-#         return render (request, 'professors/course.html', {'displayedCourses':displayedCourses})
+class CourseDetailProf(LoginRequiredMixin, View):
+    def get(self, request, pk):
+        course = get_object_or_404(Course, pk=pk)
+        return render(request, 'professors/CourseDetailProf.html', {'course': course})
     
+class TestDetailProf(LoginRequiredMixin, View):
+    def get(self, request, pk):
+        testProf =get_object_or_404(test, pk=pk)
+        return render (request, 'TestProf.html', {'testProf':testProf})
 
     # return render(request, 'professors/course
 # class GradeUpdateView(LoginRequiredMixin, UpdateView):

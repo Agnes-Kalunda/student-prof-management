@@ -111,7 +111,13 @@
             <div class="col-md-9 mx-auto card new" style="margin-top: 5%;">
               {% if publishedTests %}
               {% for publishedTest in publishedTests %}
-              {{publishedTest.title}}
+              <div style="display: flex; justify-content: space-between;">
+               <p style="text-decoration: none; color: black; padding-bottom: 2%; padding-top: 2%; padding-right: 11%;">
+                {{publishedTest.title}}
+               </p> 
+                <a href="{% url 'TestDetailProf' publishedTest.pk %}" style="text-decoration: none; color: #5E5CC0; padding-bottom: 2%; padding-top: 2%; padding-right: 11%; ">VIEW</a>
+              </div>
+              
               {% endfor %}
               {% else%}
               <h4>You haven't published any Tests yet...</h4>

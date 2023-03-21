@@ -1,7 +1,7 @@
 from django.urls import path
 from django.contrib.auth import views as auth_views
 from . import views
-from professors.views import ProfessorReg, addCourse, addTest, GradeCreateView
+from professors.views import ProfessorReg, addCourse, addTest, GradeCreateView, CourseDetailProf, TestDetailProf
 
 urlpatterns = [
     
@@ -14,6 +14,8 @@ urlpatterns = [
     path('posted-tests/', views.publishedTests, name = 'postedTest'), #postedTests
     path('studentsEnrolled/', views.enrolled_students, name='studentsEnrolled'),
     path('create_grade/', GradeCreateView.as_view(), name='create_grade'),
+    path('CourseDetailProf/<int:pk>/', CourseDetailProf.as_view(), name='CourseDetailProf'),
+    path('TestDetailProf/<int:pk>/', TestDetailProf.as_view(), name='TestDetailProf'),
    
     # path('update_grade/<int:pk>/', GradeUpdateView.as_view(), name='update_grade'),
     # path('delete_grade/<int:pk>/', GradeDeleteView.as_view(), name='delete_grade'),
