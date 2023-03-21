@@ -112,13 +112,18 @@
             
             {% for record in students %}
             <div class="card tests">
-                <h4 style="color: #5E5CC0;">{{record}}</h4>
+                <h4 style="color: #5E5CC0;">{{record}} </h4>
+                <!-- {% for enrolledCourse in record.enrolledCourses %}
+                    <h4>{{ enrolledCourse.category }}</h4>
+                {% endfor %} -->
+        
                 <small></small> <!--Add programs-->
                 <strong>
                     <!-- <p style="float: right; text-transform: uppercase; color:#5E5CC0;">View</p> -->
                 </strong>
             </div>
-            {% endfor %}
+        {% endfor %}
+        
         </div>
     </div>
   
