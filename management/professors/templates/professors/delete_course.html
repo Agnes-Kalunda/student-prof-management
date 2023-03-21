@@ -99,30 +99,29 @@
         </div>
     </div>
 </nav>
-    <section class="" style="height: 100vh;">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-6 mt-5 mx-auto card new">
-              
-                    <form action="{% url 'new-course' %}" method="POST" enctype="multipart/form-data" novalidate>
-                      {% csrf_token %}
-                         {% for field in form.visible_fields %}
-                           <div class="form-group">
-                               {{ field.label_tag }}
-                                  {% render_field field class="form-control" %}
-                                    {% for error in field.errors %}
-                                      <span style="color:red">{{ error }}</span>
-                                    {% endfor %}
-                         {% endfor %}
-                             <input type="submit" value="Add Course" class="mt-4 btn btn-block btn-primary" style="background-color: #5E5CC0;">
-                           </div>
-                    </form>
-                 
+<section class="home bg-light" style="height: 100vh;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 mt-5 mx-auto card">
+                <div class="card-header">
+                    <h2>Delete Course</h2>
                 </div>
-              </div>
+                <div class="card-body">
+                    <p>Are you sure you want to delete this course?</p>
+                    <p><strong>{{ course.name }}</strong></p>
+                    <form action="{% url 'delete_course' course.id %}" method="POST">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <input type="submit" value="Delete" class="btn btn-danger">
+                            <a href="{% url 'CourseDetailProf' course.id %}" class="btn btn-secondary">Cancel</a>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
-      </section>
+    </div>
+</section>
+  
       <script src="{% static 'js/script.js' %}"></script>
 </body>
 </html>

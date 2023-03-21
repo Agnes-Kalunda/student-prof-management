@@ -1,12 +1,12 @@
 from django.shortcuts import render, redirect , get_object_or_404
 from django.contrib.auth import login, logout, authenticate
-from django.views.generic import CreateView
+from django.views.generic import CreateView , UpdateView, DeleteView
 from django.urls import reverse_lazy
 from .models import *
 from .forms import *
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import messages
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.http import HttpResponseNotFound
 from django.db.models import Prefetch  
 from django.views.generic import View
@@ -125,6 +125,25 @@ class addCourse(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.professor=self.request.user.professor
         return super().form_valid(form)
+    
+class EditCourseView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    model = Course
+    fields = ['title', 'category', 'coursePoster', 'descriptions', 'body']
+    template_name = 'professors/edit_course.html'
+
+    def test_func(self):
+        course = self.get_object()
+        return course.professor == self.request.user.professor
+
+
+class DeleteCourseView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = Course
+    template_name = 'professors/delete_course.html'
+    success_url = reverse_lazy('professor')
+
+    def test_func(self):
+        course = self.get_object()
+        return course.professor == self.request.user.professor
 
 class addTest(LoginRequiredMixin, CreateView):
     model = test

@@ -99,30 +99,33 @@
         </div>
     </div>
 </nav>
-    <section class="" style="height: 100vh;">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-6 mt-5 mx-auto card new">
-              
-                    <form action="{% url 'new-course' %}" method="POST" enctype="multipart/form-data" novalidate>
-                      {% csrf_token %}
-                         {% for field in form.visible_fields %}
-                           <div class="form-group">
-                               {{ field.label_tag }}
-                                  {% render_field field class="form-control" %}
-                                    {% for error in field.errors %}
-                                      <span style="color:red">{{ error }}</span>
-                                    {% endfor %}
-                         {% endfor %}
-                             <input type="submit" value="Add Course" class="mt-4 btn btn-block btn-primary" style="background-color: #5E5CC0;">
-                           </div>
-                    </form>
-                 
-                </div>
+<section class="" style="height: 150vh;">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 mt-5 mx-auto card edit">
+          <form action="{% url 'edit_course' course.id %}" method="POST" enctype="multipart/form-data" novalidate>
+            {% csrf_token %}
+            {% for field in form.visible_fields %}
+              <div class="form-group">
+                {{ field.label_tag }}
+                {% render_field field class="form-control" %}
+                {% for error in field.errors %}
+                  <span style="color:red">{{ error }}</span>
+                {% endfor %}
               </div>
-            </div>
+            {% endfor %}
+            <input type="submit" value="Update Course" class="mt-4 btn btn-block btn-primary" style="background-color: #5E5CC0;">
+          </form>
+          <form action="{% url 'delete_course' course.id %}" method="POST" style="padding-bottom: 3%;">
+            {% csrf_token %}
+            <input type="hidden" name="_method" value="DELETE">
+            <input type="submit" value="Delete Course" class="mt-4 btn btn-block btn-danger">
+          </form>
         </div>
-      </section>
+      </div>
+    </div>
+  </section>
+  
       <script src="{% static 'js/script.js' %}"></script>
 </body>
 </html>

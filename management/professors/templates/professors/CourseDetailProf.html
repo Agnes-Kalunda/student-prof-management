@@ -118,7 +118,7 @@
                 
                 <p class ="text-center">Course Description: {{course.descriptions}}</p>
                 <p>{{course.body}}</p>
-                <p style="color: #5E5CC0; text-align: right; font-weight: bolder;">Edit Course</p>
+                <a href="{% url 'edit_course' course.pk %}" style="color: #5E5CC0; text-align: right; font-weight: bolder;">Edit Course</a>
                 
                  
                 </div>
