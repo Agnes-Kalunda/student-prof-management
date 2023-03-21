@@ -35,17 +35,17 @@
                 <li class="nav-link">
                     <a href="{% url 'new-course' %}">
                         <i class='bx bx-plus-circle icon'></i>
-                        <span class="text nav-text">NEW COURSE</span>
+                        <span class="text nav-text">COURSE</span>
                     </a>
                 </li>
                 <li class="nav-link">
                     <a href="{% url 'new-test' %}">
                         <i class='bx bx-list-plus icon'></i>
-                        <span class="text nav-text"> NEW TEST</span>
+                        <span class="text nav-text">TEST</span>
                     </a>
                 </li>
                 <!-- <li class="nav-link">
-                    <a href="#">
+                    <a href="#postedCourses">
                         <i class='bx bx-book-open icon'></i>
                         <span class="text nav-text">POSTED COURSES</span>
                     </a>
@@ -95,32 +95,33 @@
         </div>
     </div>
 </nav>
+
 <section class="home bg-light" style="height: 100vh;">
     <h3 class="text" style="text-align: center;">{{user.first_name}}'s Dashboard</h3>
 
-    
     <h2 class="text-muted" style="padding-top: 4%; padding-left: 4%;">Enrollment list:</h2>
-    <table class="card tests" style="display: flex; justify-content: space-evenly;">
-        <thead>
-          <tr >
-            <th >Student Name</th>
-            <th >Course Title</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% if students_and_courses %}
-          {% for student_and_course in students_and_courses %}
-            <tr>
-              <td>{{ student_and_course.student_name }}</td>
-              <td>{{ student_and_course.course_title }}</td>
-            </tr>
-          {% endfor %}
-          {% else %}
-          <h4> You don't have any Students enrolled yet..</h4>
-          {% endif %}
-        </tbody>
-      </table>
- 
+    <div class="intro">
+        <div class="card professor">
+
+            <div style="display: flex; justify-content: space-evenly;">
+            <h4>Student</h4>
+            <h4>Program</h4>
+            <h4>Grade</h4>
+
+            </div>
+            
+            {% for record in students %}
+            <div class="card tests">
+                <h4 style="color: #5E5CC0;">{{record}}</h4>
+                <small></small> <!--Add programs-->
+                <strong>
+                    <!-- <p style="float: right; text-transform: uppercase; color:#5E5CC0;">View</p> -->
+                </strong>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+  
 
 </section>
 

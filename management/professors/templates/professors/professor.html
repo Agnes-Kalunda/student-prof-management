@@ -100,19 +100,27 @@
 
     <h2 class="text-muted" style="padding-top: 4%; padding-left: 4%; padding-bottom: 0%;">Published Courses:</h2>
     <div class="card courses" id="postedCourses">
-       
+        {% for publishedCourse in publishedCourses %}
         {% for course_info in course_data %}
-        <div class="card angular" style="margin: 2%;">
-            <h3 class="text-muted" style="padding-bottom: 2%;">{{publishedCourse.category}}</h3>
-            <img src="{{course_data.coursePoster.url}}" alt="" style="height:170px; width: 90%;">
-            <!-- <p class="pt-5" style="width: 100%; margin:auto;"><progress value="100" max="100" class="ang"></progress> -->
-            </p>
-            <p style="width: 80%; margin:auto; padding-top: 2%;" class="text-muted">
-
-                <span>Enrolled students:  {{course_info.student_count}}</span>
-            </p>
-        </div>
+            {% if course_info.course == publishedCourse %}
+            <div class="card angular" style="margin: 2%;">
+                <h3 class="text-muted" style="padding-bottom: 2%;">{{publishedCourse.category}}</h3>
+                <img src="{{publishedCourse.coursePoster.url}}" alt="" style="height:170px; width: 90%;">
+                <p style="width: 80%; margin:auto; padding-top: 2%;" class="text-muted">
+                    Enrolled students:  {{ course_info.student_count }}
+                    {% if course_info.student_count > 0 %}
+                        <ul>
+                        {% for student in course_info.enrolled_students %}
+                            <li>{{ student.first_name }} {{ student.last_name }}</li>
+                        {% endfor %}
+                        </ul>
+                    {% endif %}
+                </p>
+            </div>
+            {% endif %}
         {% endfor %}
+    {% endfor %}
+    
 
 
     </div>

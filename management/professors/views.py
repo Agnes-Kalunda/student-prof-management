@@ -68,28 +68,20 @@ def loginProfessor(request):
     # print(course_counts)
     # return render(request, 'professors/professor.html', {'publishedCourses': publishedCourses,  'count': count})
 
+
+
 def professor(request):
     publishedCourses = Course.objects.filter(professor=request.user.professor).all()
-   
-    students = Student.objects.filter(
-        enrolls__in=publishedCourses
-    ).prefetch_related(
-        Prefetch('enrolls', queryset=publishedCourses)
-    )
-
-    course_student_map = {}
-    for student in students:
-        for course in student.enrolls.all():
-            course_student_map.setdefault(course, []).append(student)
 
     course_data = []
     for course in publishedCourses:
+        student_count = course.students.count()
         course_data.append({
             'course': course,
-            'student_count': len(course_student_map.get(course, [])),
+            'student_count': student_count,
         })
 
-    return render(request, 'professors/professor.html', {'course_data': course_data})
+    return render(request, 'professors/professor.html', {'course_data': course_data, 'publishedCourses': publishedCourses})
 
     # instance = Student.objects.filter(enrolls__id__in = publishedCourses).values('user')[0]
     # print(students)
@@ -98,23 +90,18 @@ def professor(request):
     # return render(request, 'professors/professor.html', {'publishedCourses': publishedCourses, 'students': students, 'count': count})
 
 
-def studentsEnrolled(request):
-    published_courses = Course.objects.filter(professor=request.user.professor)
-    student_enrollments = Student.objects.filter(enrolls__in=published_courses).order_by('user__last_name')
+def enrolled_students(request):
 
-    students_and_courses = []
-    for enrollment in student_enrollments:
-        courses = enrollment.enrolls.filter(id__in=published_courses.values_list('id', flat=True))
-        for course in courses:
-            students_and_courses.append({
-                'student_name': enrollment.user.get_full_name(),
-                'course_title': course.title
-            })
+    publishedCourses = Course.objects.filter(professor = request.user.professor).all()
+    # enroll = StudentProfile.enrolledIn
+    # students = publishedCourses.students.all()
 
-    return render(request, 'professors/studentsEnrolled.html', {
-        'students_and_courses': students_and_courses
-    })
-
+    students = Student.objects.filter(enrolls__id__in = publishedCourses).all()
+    # instance = Student.objects.filter(enrolls__id__in = publishedCourses).values('user')[0]
+    print(students)
+    # count = students.count()
+    # print(count)
+    return render(request, 'studentsEnrolled.html', {'publishedCourses': publishedCourses, 'students': students})
     
     # students = Student.objects.filter(enrolls__id__in = publishedCourses).all()
     # instance = Student.objects.filter(enrolls__id__in = publishedCourses).values('user')[0]
