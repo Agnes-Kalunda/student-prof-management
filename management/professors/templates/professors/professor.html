@@ -112,7 +112,9 @@
                         {% if course_info.student_count > 0 %}
                             <ul>
                             {% for student in course_info.enrolled_students %}
-                                <li>{{ student.first_name }} {{ student.last_name }}</li>
+                            {% for record in students %}
+                                <li>{{ record }} {{ reco }}</li>
+                            {% endfor %}
                             {% endfor %}
                             </ul>
                         {% endif %}

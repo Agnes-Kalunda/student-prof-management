@@ -82,35 +82,23 @@ def professor(request):
             'student_count': student_count,
         })
     return render(request, 'professors/professor.html', {'course_data': course_data, 'publishedCourses': publishedCourses})
-    # return render(request, 'professors/professor.html', {'course_data': course_data, 'publishedCourses': publishedCourses})
-
-    # instance = Student.objects.filter(enrolls__id__in = publishedCourses).values('user')[0]
-    # print(students)
-    # count = students.count()
-    # print(count)
-    # return render(request, 'professors/professor.html', {'publishedCourses': publishedCourses, 'students': students, 'count': count})
 
 
 def enrolled_students(request):
+    publishedCourses = Course.objects.filter(professor=request.user.professor).all()
+    course_data = []
+    for course in publishedCourses:
+        students = course.students.all()
+        student_names = []
+        for student in students:
+            student_names.append(student.user.get_full_name())
+        course_data.append({
+            'course': course,
+            'students': student_names
+        })
+    return render(request, 'studentsEnrolled.html', {'course_data': course_data})
 
-    publishedCourses = Course.objects.filter(professor = request.user.professor).all()
-    # enroll = StudentProfile.enrolledIn
-    # students = publishedCourses.students.all()
-
-    students = Student.objects.filter(enrolls__id__in = publishedCourses).all()
-    # instance = Student.objects.filter(enrolls__id__in = publishedCourses).values('user')[0]
-    print(students)
-    # count = students.count()
-    # print(count)
-    return render(request, 'studentsEnrolled.html', {'publishedCourses': publishedCourses, 'students': students})
     
-    # students = Student.objects.filter(enrolls__id__in = publishedCourses).all()
-    # instance = Student.objects.filter(enrolls__id__in = publishedCourses).values('user')[0]
-    # print(students)
-    # count = students.count()
-    # print(count)
-    
-    # return render(request, 'professors/studentsEnrolled.html',  {'publishedCourses': publishedCourses, 'students': students, 'count': count})
 
 def publishedTests(request):
         publishedTests = test.objects.all()

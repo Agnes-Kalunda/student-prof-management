@@ -99,33 +99,69 @@
 <section class="home bg-light" style="height: 100vh;">
     <h3 class="text" style="text-align: center;">{{user.first_name}}'s Dashboard</h3>
 
-    <h2 class="text-muted" style="padding-top: 4%; padding-left: 4%;">Enrollment list:</h2>
-    <div class="intro">
-        <div class="card professor">
-
-            <div style="display: flex; justify-content: space-around;">
-            <h4>Student</h4>
-            <h4>Program</h4>
-            <h4>Grade</h4>
-
-            </div>
-            
-            {% for record in students %}
-            <div class="card tests">
-                <h4 style="color: #5E5CC0;">{{record}} </h4>
-                <!-- {% for enrolledCourse in record.enrolledCourses %}
-                    <h4>{{ enrolledCourse.category }}</h4>
-                {% endfor %} -->
+    <h2 class="text-muted" style="padding-top: 4%; padding-left: 4%;"></h2>
+    <title>Course Data</title>
+    <style>
+      table {
+        border-collapse: collapse;
+        width: 100%;
+        max-width: 800px;
+        margin: 0 auto;
+        height: 5%;
+      }
+      th, td {
+        /* text-align: left; */
+        padding: 8px;
+      }
+      th {
+        background-color: #5E5CC0;
+        color: white;
+        height: 4%;
+        width: 100vh;
         
-                <small></small> <!--Add programs-->
-                <strong>
-                    <!-- <p style="float: right; text-transform: uppercase; color:#5E5CC0;">View</p> -->
-                </strong>
-            </div>
+      }
+      tr:nth-child(even) {
+        background-color: #f2f2f2;
+      }
+      .card-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .card {
+        width: 300px;
+        margin: 10px;
+        background-color: #f2f2f2;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        padding-top: 3%;
+      }
+    </style>
+  </head>
+  <body>
+    <table>
+      <thead>
+        <tr>
+          <th>Subject</th>
+          <th>Student Name</th>
+          <th>Grade</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for course in course_data %}
+        {% for student in course.students %}
+        <tr class="card" style="margin-top: 3%;">
+          <td>{{ course.course.title }}</td>
+          <td>{{ student }}</td>
+          <td>{{ course.grade }}</td>
+        </tr>
         {% endfor %}
-        
-        </div>
-    </div>
+        {% endfor %}
+      </tbody>
+    </table>
+  </body>
+  
   
 
 </section>
