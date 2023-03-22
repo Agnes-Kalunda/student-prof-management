@@ -88,8 +88,12 @@ class CourseDetail(LoginRequiredMixin, View):
         # Retrieve the course instance
         displayed_course = get_object_or_404(Course, pk=pk)
         
-        # Retrieve the grade instance for the current student and course
-        grade = get_object_or_404(Grade, student=student, course=displayed_course)
+        try:
+            # Retrieve the grade instance for the current student and course
+            grade = Grade.objects.get(student=student, course=displayed_course)
+        except Grade.DoesNotExist:
+            # If no grade instance is found, set the grade to None
+            grade = None
 
         # Render the student template with the course and grade instances
         context = {
