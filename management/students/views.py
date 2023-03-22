@@ -1,12 +1,13 @@
 from django.shortcuts import get_object_or_404, render, redirect
-from django.views.generic import CreateView
+from django.views.generic import CreateView, DeleteView
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
 from django.views.generic import View
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
-from professors.models import Grade
-from . models import *
+from professors.models import Grade, EnrolledCourse, Course
+from . models import * 
+from django.urls import reverse_lazy
 from . forms import *
 
 
@@ -107,6 +108,7 @@ class TestDetail(LoginRequiredMixin, View):
     def get(self, request, pk):
         displayedtest =get_object_or_404(test, pk=pk)
         return render (request, 'professors/test.html', {'displayedtest':displayedtest})
+
 
 
 
