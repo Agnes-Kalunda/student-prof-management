@@ -88,16 +88,15 @@
         <div class="container">
           <div class="row">
             <div class="col-md-10 mt-5 mx-auto card new">
-                <p ><small class="" >Professor : {{displayedCourses.professor}}</small></p>
-                <p ="text-muted">Grade : </p>
-              <h1 class="fw-bold text center " style="color: #5E5CC0; padding-left: 45%; font-weight: bolder;">{{displayedCourses.title}}  
-                 </h1>
-                
-                <p class ="text-center">Course Description: {{displayedCourses.descriptions}}</p>
-                <p>{{displayedCourses.body}}</p>
-                
-                 
-                </div>
+                <p><small class="">Professor: {{ displayed_course.professor }}</small></p>
+                <p class="text-muted">Grade: {{ grade }}</p>
+                <h1 class="fw-bold text-center" style="color: #5E5CC0; padding-left: 45%; font-weight: bolder;">
+                    <!-- {{ displayed_course.title }} -->
+                </h1>
+                <p class="text-center">Course Description: {{ displayed_course.descriptions }}</p>
+                <p>{{ displayed_course.body }}</p>
+            </div>
+            
               </div>
             </div>
         </div>

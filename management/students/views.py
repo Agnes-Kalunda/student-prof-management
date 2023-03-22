@@ -5,7 +5,7 @@ from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
 from django.views.generic import View
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
-
+from professors.models import Grade
 from . models import *
 from . forms import *
 
@@ -79,10 +79,24 @@ def availablePrograms(request):
 
 
 class CourseDetail(LoginRequiredMixin, View):
-    def get(self, request, pk):
-        displayedCourses =get_object_or_404(Course, pk=pk)
-        return render (request, 'professors/course.html', {'displayedCourses':displayedCourses})
-    # return render(request, 'professors/course
+    template_name = 'professors/course.html'
+
+    def get(self, request, pk, *args, **kwargs):
+        # Get the current student
+        student = request.user.student
+        
+        # Retrieve the course instance
+        displayed_course = get_object_or_404(Course, pk=pk)
+        
+        # Retrieve the grade instance for the current student and course
+        grade = get_object_or_404(Grade, student=student, course=displayed_course)
+
+        # Render the student template with the course and grade instances
+        context = {
+            'displayed_course': displayed_course,
+            'grade': grade,
+        }
+        return render(request, self.template_name, context)
 
 
 class TestDetail(LoginRequiredMixin, View):
@@ -92,10 +106,18 @@ class TestDetail(LoginRequiredMixin, View):
 
 
 
-# def student_view_result(request):
-#     student = Student.objects.get(admin=request.user.id)
-#     student_result = StudentResult.objects.filter(student_id=student.id)
-#     context = {
-#         "student_result": student_result,
-#     }
-#     return render(request, "student_template/student_view_result.html", context)
+# class CourseView(View):
+#     template_name = 'professors/course.html'
+
+#     def get(self, request, *args, **kwargs):
+#         # Get the current student
+#         student = request.user.student
+        
+#         # Retrieve the grade instance from the professor's model
+#         grade = Grade.objects.filter(student=student).first()
+
+#         # Render the student template with the grade instance
+#         context = {
+#             'grade': grade,
+#         }
+#         return render(request, self.template_name, context)

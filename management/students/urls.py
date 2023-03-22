@@ -13,7 +13,12 @@ urlpatterns = [
     path('enroll/<int:pk>/',courseEnroll.as_view(), name='enroll'),
     path('complete/<int:pk>/', markComplete.as_view(), name='complete'),
     path('programs/', views.availablePrograms, name='programs'),
+    
+    
     path('course-detail/<int:pk>/', CourseDetail.as_view(), name='courseDetail'),
+    
+    
     path('test-detail/<int:pk>/', TestDetail.as_view(), name='testDetail'),
+    # path('student/', CourseView.as_view(), name='student'),
 
 ]
