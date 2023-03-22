@@ -55,7 +55,7 @@ class courseEnroll(LoginRequiredMixin, View):
      def post(self, request, pk, *args, **kwargs):
         course = Course.objects.get(pk=pk)
         course.students.add(request.user.student)
-        return redirect('students')
+        return redirect('programs')
 
 
 class markComplete(LoginRequiredMixin, View):

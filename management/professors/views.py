@@ -4,6 +4,7 @@ from django.views.generic import CreateView , UpdateView, DeleteView
 from django.urls import reverse_lazy
 from .models import *
 from .forms import *
+from django.views.generic import ListView
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
@@ -40,34 +41,6 @@ def loginProfessor(request):
     context={'form':AuthenticationForm()})
 
 
-# def professor(request):
-
-#     publishedCourses = Course.objects.filter(professor = request.user.professor).first()
-#     # enroll = StudentProfile.enrolledIn
-#     # students = publishedCourses.students.all()
-
-#     if not publishedCourses:
-#          return HttpResponseNotFound()
-    
-#     enrolled_students= publishedCourses.students.all()
-
-#     count = enrolled_students.count()
-         
-    # students = Student.objects.filter(enrolls__id__in = publishedCourses).all()
-    # count = students.count()
-
-
-
-
-
-    # course_counts = {}
-    # for course in publishedCourses:
-    #     enrolled_students = course.students.all()
-    #     course_counts[course.title] = enrolled_students.count()
-
-    # count = students.count()
-    # print(course_counts)
-    # return render(request, 'professors/professor.html', {'publishedCourses': publishedCourses,  'count': count})
 
 
 
@@ -89,12 +62,22 @@ def enrolled_students(request):
     course_data = []
     for course in publishedCourses:
         students = course.students.all()
-        student_names = []
+        student_data = []
         for student in students:
-            student_names.append(student.user.get_full_name())
+            try:
+                grade = Grade.objects.get(student=student, course=course)
+                student_data.append({
+                    'name': student.user.get_full_name(),
+                    'grade': grade.grade,
+                })
+            except Grade.DoesNotExist:
+                student_data.append({
+                    'name': student.user.get_full_name(),
+                    'grade': '-',
+                })
         course_data.append({
             'course': course,
-            'students': student_names
+            'students': student_data,
         })
     return render(request, 'studentsEnrolled.html', {'course_data': course_data})
 
@@ -160,16 +143,9 @@ class TestDetailProf(LoginRequiredMixin, View):
         testProf =get_object_or_404(test, pk=pk)
         return render (request, 'TestProf.html', {'testProf':testProf})
 
-    # return render(request, 'professors/course
-# class GradeUpdateView(LoginRequiredMixin, UpdateView):
-#     model = Grade
-#     fields = ['student', 'course', 'grade']
-#     template_name = 'updateGrade.html'
-#     def form_valid(self, form):
-#         # form.instance.professor=self.request.user
-#         return super().form_valid(form)
 
-# class GradeDeleteView(LoginRequiredMixin, DeleteView):
-#     model = Grade
-#     success_url = reverse_lazy('grades_list')
-#     template_name = 'grades/delete.html'
+class GradeListView(ListView):
+    model = Grade
+    template_name = 'grade_list.html'
+    context_object_name = 'grades'
+

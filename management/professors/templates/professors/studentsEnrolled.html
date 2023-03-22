@@ -141,26 +141,27 @@
   </head>
   <body>
 
-        <table>
-      <thead>
-        <tr>
-          <th>Subject</th>
-          <th>Student Name</th>
-          <th>Grade</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for course in course_data %}
-        {% for student in course.students %}
-        <tr class="card" style="margin-top: 3%;">
-          <td>{{ course.course.title }}</td>
-          <td>{{ student }}</td>
-          <td>{{ course.grade }}</td>
-        </tr>
-        {% endfor %}
-        {% endfor %}
-      </tbody>
-    </table>
+    <table>
+        <thead>
+          <tr>
+            <th>Subject</th>
+            <th>Student Name</th>
+            <th>Grade</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for course in course_data %}
+            {% for student in course.students %}
+              <tr class="card" style="margin-top: 3%;">
+                <td>{{ course.course.title }}</td>
+                <td>{{ student.name }}</td>
+                <td>{{ student.grade }}</td>
+              </tr>
+            {% endfor %}
+          {% endfor %}
+        </tbody>
+      </table>
+      
   </body>
   
   
